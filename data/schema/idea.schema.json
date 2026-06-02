@@ -15,7 +15,7 @@
     "blind": {
       "type": "object",
       "description": "Fält som visas för bedömaren under blindbedömning. Inget här får läcka källtypen.",
-      "required": ["idea_text", "industry", "brief_problem"],
+      "required": ["idea_text", "industry_category", "brief_problem"],
       "additionalProperties": false,
       "properties": {
         "idea_text": {
@@ -23,10 +23,10 @@
           "minLength": 1,
           "description": "Själva idén, kort men konkret — som den skulle presenteras för en kreativ chef. Detta är vad bedömaren faktiskt bedömer."
         },
-        "industry": {
+        "industry_category": {
           "type": "string",
           "minLength": 1,
-          "description": "Bransch (t.ex. 'fmcg/livsmedel', 'banking/fintech', 'fashion'). Normalisera om branschen är så specifik att den i sig identifierar projektet."
+          "description": "GROV branschkategori, får inte i sig identifiera kunden. Använd ett av de normerade värdena listade i data/schema/README.md (t.ex. 'finans', 'FMCG', 'ideell', 'telecom', 'detaljhandel'). Behövs en ny kategori — uppdatera README:s lista först, inte ad hoc."
         },
         "brief_problem": {
           "type": "string",
@@ -49,6 +49,10 @@
         "client": {
           "type": "string",
           "description": "Kund eller intern label. Läcker källtyp om bedömaren känner igen kunden — dold."
+        },
+        "industry_specific": {
+          "type": "string",
+          "description": "Den mer granulära branschen som kan identifiera kunden ('nisch-fintech B2B norra Europa', 'premium-skidkläder DTC', 'livsmedel'). Dold under blindbedömning. Frivilligt — fyll i när det tillför analytiskt värde efteråt."
         },
         "why_it_was_good": {
           "type": "string",

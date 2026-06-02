@@ -2,12 +2,13 @@
   "id": "idea_a1b2c3d4",
   "blind": {
     "idea_text": "Varje förpackning innehåller ett unikt, handskrivet meddelande från en av de anställda på fabriken. I appen kan kunden följa avsändaren via en kort film. Inget storyboard, ingen scripted authenticity — bara det som faktiskt finns på fabriken, oklippt.",
-    "industry": "fmcg/livsmedel",
+    "industry_category": "FMCG",
     "brief_problem": "Öka emotionell anknytning till varumärket bland yngre konsumenter (18–29) som ser kategorin som utbytbar."
   },
   "source": {
     "source_type": "winner",
     "client": "intern-label-fmcg-2024",
+    "industry_specific": "livsmedel — torrvaror",
     "why_it_was_good": "Använde produktionsledet som narrativt material i stället för att låtsas om det. Skalbart utan att kännas konstgjort — varje meddelande kostade nästan inget men kändes unikt. Resulterade i mätbar lyft i unaided brand recall hos målgruppen.",
     "what_was_rejected": "En traditionell influencer-väg och en regisserad 'fabriksdokumentär'.",
     "notes": "Vann internt kreativt pris 2024. Exempel — inte en riktig idé från arkivet."
