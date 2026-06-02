@@ -4,10 +4,13 @@ Internt R&D-projekt på Valtech RADON (Stockholm). Bygger en idégenererings-
 motor som producerar **genuint oväntade** kreativa uppslag — inte mer
 medel-output.
 
-Slutanvändare är seniora kreatörer/CD:s. Deras kvalitetsomdöme är facit,
-inte en benchmark-siffra. Värdet ligger inte i koden — det ligger i den
-lokala kunskapen vi genererar: vad RADON:s seniorer kallar bra, och vilka
-grepp som faktiskt flyttar nålen hos just oss.
+Slutanvändare är seniora kreatörer/CD:s. En *creative director* fungerar
+som måttstockens auktoritet — hens kvalitetsomdöme är facit, inte en
+benchmark-siffra. En andra läsare gör lätta stickprovskontroller mot
+CD:ns blinda fläckar — som komplement, inte som parallell domare. Värdet
+ligger inte i koden — det ligger i den lokala kunskapen vi genererar:
+vad CD:n kallar bra, och vilka grepp som faktiskt flyttar nålen hos just
+oss.
 
 > Full regelbok för hur projektet ska byggas: se [`CLAUDE.md`](./CLAUDE.md).
 
@@ -23,10 +26,10 @@ tränar aldrig om en modell.
 
 | Fas | Vad | Slutar med |
 |---|---|---|
-| **0 — Måttstocken** | Seniorer bedömer blandat material blint. | Inter-rater-mått; underlag som senare faser jämför sig mot. |
+| **0 — Måttstocken** | CD bedömer blandat material blint; andra läsaren gör stickprovskontroll mot blinda fläckar. | CD:ns omdöme som måttstock; CD:ns konsekvens med sig själv över tid som stabilitetskontroll. |
 | **1 — Enklaste greppet** | Naiv generering vs. verbalized sampling. | Mått: distinkta konceptfamiljer mot Fas 0-måttstocken. |
 | **2 — Freak facts** | Cross-domain-material översatt till bärande mekanism, sen generering. | Paired test (samma brief med/utan). |
-| **3 — Urvalet** | Pareto/flerdimensionellt urval + golv-grind + räddningskö. | Jämförelse: systemets urval vs. seniorernas på samma material. |
+| **3 — Urvalet** | Pareto/flerdimensionellt urval + golv-grind + räddningskö. | Jämförelse: systemets urval vs. CD:ns på samma material. |
 | **4 — Ihopsättning** | Bara komponenter som klarat sitt prov. | Här (inte förr) introduceras ev. orkestreringsramverk. |
 
 Vi går inte vidare till nästa fas förrän den föregående mätts mot
@@ -37,6 +40,34 @@ måttstocken.
 1. Andel idéer i toppskiktet (svansen, inte snittet).
 2. Hur mycket bredare idérymden blir per brief (distinkta koncept, inte volym).
 3. Kostnad per idé en människa faktiskt vill utveckla vidare.
+
+## Centrala vägval — och varför
+
+- **Måttstock först.** Vad bra är definieras *innan* generering och urval
+  byggs. Annars hamnar vi i att mäta nya idéer mot proxy-mått som råkar
+  gynna systemet vi just byggt. Måttstocken är facit; resten är hypoteser
+  som ska prövas mot den.
+- **En variabel i taget.** Två mekanismer i samma experiment går inte att
+  attribuera. Naiv vs. verbalized sampling testas innan freak facts läggs
+  på; freak facts innan urvalslogiken; urval innan ihopsättningen. Om vi
+  blandar är resultatet värdelöst, hur lovande det än ser ut.
+- **Människan har sista ordet.** LLM-as-judge korrelerar nära noll med
+  experter på kreativ kvalitet. Modellen får triage:a och ge ledtrådar,
+  men ingen automatisk poäng avgör vad som är briljant.
+- **Måttstockens auktoritet: CD + sanity-check.** En *creative director*
+  är måttstockens auktoritet. En andra läsare gör lätta stickprovs-
+  kontroller mot CD:ns blinda fläckar — inte som parallell domare.
+  Stabilitet mäts som CD:ns konsekvens med sig själv över tid, inte som
+  inter-rater agreement mellan flera bedömare. Detta är ett medvetet byte
+  från en tidigare modell med flera seniorer (se
+  [`docs/decisions/`](./docs/decisions/), ADR 0002).
+- **Elo och "svärm först" valdes bort.** Elo (och varje annan enda
+  hopvägd totalpoäng) kollapsar mot det trygga — fel mekanism för ett
+  system som ska skydda det vassa. Ersätts av Pareto/flerdimensionellt
+  urval i Fas 3. Multi-agent-svärm hör hemma först i Fas 4 (om alls),
+  inte som startarkitektur — mode collapse-greppen (frågan, ingången,
+  urvalet) måste testas en variabel i taget innan det är meningsfullt
+  att sätta ihop dem.
 
 ## Mappstruktur
 
