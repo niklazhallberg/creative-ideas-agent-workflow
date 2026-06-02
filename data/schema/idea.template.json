@@ -1,0 +1,15 @@
+{
+  "id": "idea_REPLACE_ME",
+  "blind": {
+    "idea_text": "<beskriv idén kort men konkret — som den skulle presenteras för en kreativ chef. Detta är vad bedömaren ser.>",
+    "industry": "<bransch, t.ex. fmcg/livsmedel | banking/fintech | fashion. Normalisera om branschen är så specifik att den identifierar projektet.>",
+    "brief_problem": "<vad briefen skulle lösa>"
+  },
+  "source": {
+    "source_type": "<winner | discarded | ai_baseline>",
+    "client": "<kundnamn eller intern label — syns ALDRIG för bedömaren>",
+    "why_it_was_good": "<för 'winner': kort om varför idén faktiskt funkade. Lämna tom för 'discarded' och 'ai_baseline'.>",
+    "what_was_rejected": "<om möjligt: vilket alternativ valdes bort till förmån för denna. Frivilligt.>",
+    "notes": "<fri kontext för analysen efteråt. Får aldrig renderas för bedömaren.>"
+  }
+}

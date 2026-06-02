@@ -1,0 +1,24 @@
+[project]
+name = "radon"
+version = "0.0.1"
+description = "RADON Idea Engine — experiment-driven creative idea generation"
+requires-python = ">=3.11"
+dependencies = [
+    "python-dotenv",
+    "anthropic",
+]
+
+# Andra leverantörer aktiveras när multi-provider blir en aktiv experimentvariabel.
+# Installera då med:  pip install -e ".[multi-provider]"
+[project.optional-dependencies]
+multi-provider = [
+    "openai",
+    "google-genai",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

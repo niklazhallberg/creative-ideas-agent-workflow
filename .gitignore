@@ -1,0 +1,42 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Rådata och processade dataset — aldrig committat (sekretess + storlek)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Experimentutdata — rå output och mänskliga omdömen committas inte
+results/runs/*
+!results/runs/.gitkeep
+results/evals/*
+!results/evals/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://radon.valtech/schemas/idea.schema.json",
+  "title": "Idea — Fas 0 yardstick input",
+  "description": "En idé i Fas 0-måttstocken. Splittad i 'blind' (vad bedömaren ser) och 'source' (metadata som är dold under blindbedömning). Verktyget som renderar idéer för bedömning får ALDRIG visa något från 'source'.",
+  "type": "object",
+  "required": ["id", "blind", "source"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^idea_[a-z0-9]{8}$",
+      "description": "Neutralt id på formen idea_<8 lowercase alphanum>. Slumpgenererat. Inget semantiskt innehåll — annars riskerar id:t självt avslöja källan."
+    },
+    "blind": {
+      "type": "object",
+      "description": "Fält som visas för bedömaren under blindbedömning. Inget här får läcka källtypen.",
+      "required": ["idea_text", "industry", "brief_problem"],
+      "additionalProperties": false,
+      "properties": {
+        "idea_text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Själva idén, kort men konkret — som den skulle presenteras för en kreativ chef. Detta är vad bedömaren faktiskt bedömer."
+        },
+        "industry": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Bransch (t.ex. 'fmcg/livsmedel', 'banking/fintech', 'fashion'). Normalisera om branschen är så specifik att den i sig identifierar projektet."
+        },
+        "brief_problem": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Vad briefen skulle lösa. Bedömaren behöver detta för att bedöma fit-to-brief."
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "Metadata som är DOLD under blindbedömning. Används bara för analys efteråt (vilken källtyp landade högst, etc.).",
+      "required": ["source_type"],
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["winner", "discarded", "ai_baseline"],
+          "description": "Var idén kommer ifrån. Vetskap förstör experimentet direkt — får aldrig visas för bedömaren."
+        },
+        "client": {
+          "type": "string",
+          "description": "Kund eller intern label. Läcker källtyp om bedömaren känner igen kunden — dold."
+        },
+        "why_it_was_good": {
+          "type": "string",
+          "description": "För 'winner': kort om varför idén faktiskt funkade i sitt ursprungssammanhang. Finns ofta bara för vinnare — läcker direkt."
+        },
+        "what_was_rejected": {
+          "type": "string",
+          "description": "Om möjligt: vilket alternativ valdes bort till förmån för denna idé. Finns bara i vissa fall."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Fri kontext för analysen efteråt. Får inte renderas för bedömaren — kan innehålla läckage."
+        }
+      }
+    }
+  }
+}
