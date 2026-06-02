@@ -66,6 +66,16 @@
           "type": "string",
           "description": "Fri kontext för analysen efteråt. Får inte renderas för bedömaren — kan innehålla läckage."
         }
+      },
+      "if": {
+        "properties": { "source_type": { "const": "ai_baseline" } },
+        "required": ["source_type"]
+      },
+      "then": {
+        "properties": {
+          "why_it_was_good": false,
+          "what_was_rejected": false
+        }
       }
     }
   }

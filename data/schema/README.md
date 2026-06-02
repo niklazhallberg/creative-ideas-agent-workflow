@@ -50,6 +50,15 @@ kategorin ger bedömaren kontext utan att avslöja kunden. Den specifika
 branschen — där läckage faktiskt kan ske — bor i `source` och används bara
 i analysen efteråt.
 
+## Villkorad regel (enforced i schemat)
+
+För `source_type: "ai_baseline"` är `why_it_was_good` och `what_was_rejected`
+**förbjudna** — JSON Schemats `if/then` förkastar instanser som har dem.
+Båda fälten är källspecifika annoteringar som bara finns för riktiga gamla
+idéer; om de smyger sig in på en AI-baseline pekar det på en buggig
+pipeline, inte på en konstig idé. Skydd som regel, inte som instruktion
+i prosa.
+
 ## Tillåtna grova branschkategorier (`blind.industry_category`)
 
 Normerad lista. Välj **alltid** ett av dessa värden:
@@ -57,7 +66,7 @@ Normerad lista. Välj **alltid** ett av dessa värden:
 - `finans` — bank, försäkring, kapitalförvaltning, fintech, betalningar
 - `FMCG` — livsmedel, dryck, hygien, hushåll
 - `detaljhandel` — fysisk handel, e-handel, marketplaces (icke-FMCG-varor)
-- `tech` — mjukvara, SaaS, hårdvara, AI-tjänster, telekom-utrustning
+- `tech` — mjukvara, SaaS, hårdvara, AI-tjänster
 - `telecom` — operatörer, bredband, mobiloperatörer
 - `media` — broadcast, streaming, förlag, gaming
 - `automotive` — fordon, mobilitet, laddinfrastruktur
