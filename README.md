@@ -16,34 +16,91 @@ och vilka grepp som faktiskt flyttar nålen hos just oss.
 
 ## Från ursprungsbriefen till den här planen
 
-Projektet startade med en brief till vår Creative Technologist: bygg *"ett
-system som skapar världens mest attraktiva idéer"*. Skissen var konkret —
-ett automatiserat AI-flöde med människan i loopen. En svärm scout-agenter
-skulle skrapa nischade källor efter "freak facts", en brief-agent skulle
-destillera kundens brief till en Single Minded Proposition, en tredje
-input (Agency DNA) skulle bära RADON:s kreativa röst, en "mutation lab"
-skulle producera 500 idéer, en "death match arena" med en konstitutionell
-AI-domare skulle filtrera 500 → 10 på tre axlar (Surprise Score, Brand
-Fit, Radon Style), och 10 idéer skulle levereras till Slack för människan.
+Projektet startade med en brief till vår Creative Technologist. Vi
+återger den ordagrant först, sen vår läsning. Där vi tolkar säger vi det.
+
+### Vad briefen säger — ordagrant
+
+Målraden och de fem raderna under den:
+
+> **Mål:** Ett system som skapar världens mest attraktiva idéer
+>
+> **Vad:** Ett automatiserat AI-system, med människan i loopen, som
+> ständigt genererar idéer (proaktivt och på brief).
+>
+> **Hur:** En arkitektur som bygger på befintligt arbetssätt
+> (brief → insikt (freak facts) → idé) fast på en mycket större skala.
+>
+> **Varför:** För att inte begränsa oss till våra egna hjärnor, utan
+> låta AI-agenter gräva i internets alla hörn innan vi kliver in.
+>
+> **Effekt:** Större volym, mer fokus för kreatörer att välja
+> (alla blir CD), bättre idéer?!
+>
+> **Utmaning:** Att infusera vår kollektiva kreativa röst i lösningarna
+> VS alla kreatörer gör sin röst starkare. — Hur sätter vi upp ett
+> lärande system?
+
+Arkitekturskissen har tre inputs och ett flöde. Ordagranna beskrivningar
+från skissen (originalet är engelskt):
+
+- **Input 1 — Insight Scouring.** *"A swarm of AI 'Scout' Agents are
+  constantly scraping niche scientific journals, obscure subreddits
+  (like r/unresolvedmysteries or r/academic_neuroscience), and historical
+  archives to find 'Freak Facts.' These are high-value, non-obvious human
+  truths that serve as the creative 'disruptor.'"*
+- **Input 2 — Brief & Context.** *"A small, dedicated Brief Agent Swarm
+  ingests the client deck, extracting the Core Single Minded Proposition
+  (SMP) and audience constraints. This ensures the output is always
+  grounded in the client's business problem."*
+- **Input 3 — The Agency DNA (Skill.md).** *"This is our Moat. This
+  structured file contains the distilled 'creative soul' of Valtech
+  Radon—your specific preferred metaphors, past winning work, and the
+  visual rules defined by your best directors and creative."*
+
+De tre inputs matar en *Creative Agentic Brief* → en *"Mutation lab"*
+(*"Output & Goal: 500 ideas that are on brief."*) → en *"Death match
+arena"* (*"500 becomes 10. RIP 490."*), där en *"Constitutional AI Agent
+(trained on Radon's collective know-how and 'soul') + individual creative
+voice"* betygsätter varje idé på tre axlar: *Surprise Score, Brand Fit,
+Radon Style*. Idéer som är *"too safe"* eller *"generic AI-sounding"*
+skickas tillbaka eller avvisas — *"to ensure the output always meets your
+specific 'Radon-quality.'"* De 10 överlevande levereras till *"Agnes in
+DM or e.g. #RFSU_IDEATION."*
+
+### Vad vi läser som styrande — inte målraden
+
+*(Detta är vår tolkning, inte briefens ord.)*
+
+Målraden är säljraden. Substansen — som vi läser den — ligger i två andra
+delar av briefen som pekar på samma sak:
+
+- **Utmaning-raden** frågar efter ett *lärande system* som infuserar
+  RADON:s kollektiva kreativa röst utan att sudda ut den individuella.
+- **Input 3 (Agency DNA)** utpekas i skissen som *"our Moat"* och
+  beskriver substansen: RADON:s *"creative soul"* — föredragna metaforer,
+  *"past winning work"*, visuella regler från byråns bästa kreatörer och
+  regissörer.
+
+Så det som styr vårt bygge är: **projektet ska producera idéer som är
+igenkännbart RADON — inte generiska AI-idéer — och som lär av tidigare
+vinnande arbete och kreatörernas egen röst.** Det är den frågan planen
+försöker besvara, inte *"världens mest attraktiva idéer"* som ordagrann
+ambition.
 
 ### Vad briefen fick rätt
 
-Innan vi säger något annat: briefen ställde rätt frågor. Det är viktigt.
-
-- Den identifierade den centrala spänningen exakt: *hur infuserar vi
-  RADON:s kollektiva kreativa röst i lösningarna, samtidigt som varje
-  kreatör gör sin egen röst starkare — hur sätter vi upp ett lärande
-  system?* Det är projektets själva syfte, och den frågan driver
-  fortfarande hela planen.
-- Den var **ärligt osäker**. "Effekt: bättre idéer?!" med frågetecken —
-  den som skrev visste att detta var en hypotes att pröva, inte en
-  garanti. Det är en styrka, inte en svaghet.
-- **Grundsekvensen brief → insikt → idé** är sund. Den lever kvar
-  oförändrad i den nya planen.
-- **Freak facts som kreativ disruptor** är en stark intuition — det visar
-  sig ha det starkaste forskningsstödet av alla grepp vi granskat för att
-  skapa nya vinklar.
-- **Människan i loopen fanns med från början.** Rätt instinkt.
+- **Utmaning-raden ställer rätt fråga.** Kollektiv röst utan att sudda ut
+  individuell röst är projektets själva syfte, och den driver fortfarande
+  hela planen.
+- **Ärligt osäker.** *"bättre idéer?!"* med frågetecken — den som skrev
+  visste att detta var en hypotes att pröva, inte en garanti. Det är en
+  styrka.
+- **Grundsekvensen *"brief → insikt (freak facts) → idé"*** är sund. Den
+  lever kvar oförändrad i den nya planen.
+- **Freak facts som kreativ disruptor** är en stark intuition — den har
+  starkt forskningsstöd bland grepp för att skapa nya vinklar.
+- **"Med människan i loopen" fanns med från början** — rätt instinkt.
 
 Kort sagt: briefen var en skarp första skiss, inte ett misstag. Det som
 följer är inte en kritik utan en uppdatering baserad på vad tre oberoende
@@ -51,48 +108,51 @@ forskningsdjupdykningar visade oss efteråt.
 
 ### Var briefen inte är optimalt utformad — och varför
 
-Tre saker skulle brista om vi byggde exakt efter skissen. Varje punkt är
-bekräftad av forskning, inte tycke.
+*(Detta är vår läsning stödd av forskning, inte briefens egna ord. Tre
+saker skulle brista om vi byggde exakt efter skissen.)*
 
-**1. "Death match"-domaren skulle systematiskt välja fel.** Att låta en
-AI-domare betygsätta 500 idéer på tre axlar (Surprise, Brand Fit, Radon
-Style) och slå ihop till en ranking låter rigoröst. Problemet är att en
-sammanvägd poäng gynnar systematiskt den *jämna, säkra* idén över den
-*vågade, ojämna*. Maskinen blir tyst en mediokritetsförstärkare som rensar
-bort exakt de sällsynta briljanta idéerna en byrå på RADON:s nivå lever
-av. Dessutom: AI:ns omdöme om kreativ kvalitet korrelerar nära noll med
-mänskliga experters — så även utan sammanvägningen är den fel instans att
-låta bestämma vad som är briljant.
+**1. AI-domaren är fel instans att låta bestämma vad som är briljant.**
+Briefen låter en *"Constitutional AI Agent"* betygsätta idéer på tre
+axlar (*Surprise Score, Brand Fit, Radon Style*) och sedan reducera
+500 → 10 i en *"Tournament Stage"*. Två separata problem:
+
+- AI:ns omdöme om kreativ kvalitet korrelerar nära noll med mänskliga
+  experters. Även om domaren är *"constitutional"* och tränad på RADON:s
+  *"soul"*, är den fel instans att låta bestämma vad som är briljant.
+- Exakt hur *Tournament Stage* reducerar 500 → 10 är inte specificerat i
+  skissen. Men reduktionsprocesser som väger flera axlar mot varandra
+  gynnar i praktiken systematiskt den *jämna, säkra* idén över den
+  *vågade, ojämna*, oavsett om vägningen är explicit sammanvägd poäng
+  eller stegvis elimination. Maskinen skulle tyst filtrera bort exakt de
+  sällsynta briljanta idéer en byrå på RADON:s nivå lever av.
 
 **2. Att bygga hela svärmen samtidigt gör det omöjligt att veta vad som
-funkade.** Om scout-svärm, brief-agent, mutation lab, domare och Slack-
-leverans byggs på en gång, och något inte funkar, kan man inte peka på
-vilken del som orsakade det. Multi-agent-system fallerar dessutom i en
-stor andel fall — och nästan alla fel sitter i *skarvarna* mellan
+funkade.** Om scout-svärm, brief-agent, mutation lab, domare och
+Slack-leverans byggs på en gång, och något inte funkar, kan man inte
+peka på vilken del som orsakade det. Multi-agent-system fallerar dessutom
+i en stor andel fall — och nästan alla fel sitter i *skarvarna* mellan
 agenterna, inte i agenterna själva. Merparten av tiden skulle gå åt till
-att laga skarvar innan vi ens vet om själva agenterna var värda att sätta
-ihop.
+att laga skarvar innan vi ens vet om själva agenterna var värda att
+sätta ihop.
 
 **3. Ingen linjal — bara en känsla av att det blev bättre.** Skissen
 saknar en definierad måttstock för vad "bra" betyder hos RADON. Utan en
-sådan kan man *känna* att ett nytt grepp hjälpte, men inte veta det. Det
-är skillnaden mellan bevisad kunskap och gissning — och det är just den
-bevisade kunskapen som är projektets faktiska värde för byrån (koden i
-sig är enkel och kopierbar; kunskapen om vår smak är det inte).
+sådan kan man *känna* att ett nytt grepp hjälpte, men inte veta det.
+Det är skillnaden mellan bevisad kunskap och gissning — och det är just
+den bevisade kunskapen som är projektets faktiska värde för byrån (koden
+i sig är enkel och kopierbar; kunskapen om vår smak är det inte).
 
 ### Vad vi gör i stället — enkelt förklarat
 
-Vi bytte **inte målbild.** Visionen står: ett lärande system som gör varje
-kreatör vassare och infuserar RADON:s röst. Vi bytte *vägen dit* så att
-den blir mätbar, attribuerbar och håller över tid.
+Vi bytte **inte målbild.** Vi bytte *vägen dit* så att den blir mätbar,
+attribuerbar och håller över tid.
 
 | Vad briefen föreslog | Vad vi gör i stället | Varför |
 |---|---|---|
-| Bygg hela svärmen först | Bygg en **linjal** först (Fas 0), testa sedan **ett grepp i taget** (Fas 1–3) | Vi vill veta *varför* något funkar, inte bara att det gör det. |
-| AI-domare med hopvägd poäng | **Människa** som sista domare + flera axlar utan totalpoäng | Sammanvägning kollapsar mot det trygga; AI korrelerar nära noll med experter på kreativ kvalitet. |
-| Freak facts direkt in i prompten | Freak facts **översatta till bärande kreativ mekanism** först | Rått inkastade sänker kvaliteten; översatta höjer den. |
-| Svärm av agenter från dag 1 | **Svärm i sista fasen**, av bara delar som bevisat sig | Nästan alla svärm-fel sitter i skarvarna, inte i agenterna. |
-| "Bättre idéer?!" som förhoppning | **Uppmätt effekt** mot CD:ns omdöme, i varje fas | Det är enda sättet att veta om något faktiskt hjälpte. |
+| Hela flödet (scout-svärm + brief-agent + mutation lab + AI-domare + Slack) byggt på en gång | Bygg en **linjal** först (Fas 0), testa sedan **ett grepp i taget** (Fas 1–3) | Vi vill veta *varför* något funkar, inte bara att det gör det. |
+| AI-domare (*"Constitutional AI Agent"*) reducerar 500 → 10 via *Tournament Stage* på tre axlar | **Människa** som sista domare + flera axlar utan totalpoäng | AI korrelerar nära noll med experter på kreativ kvalitet; multi-axis-reduktion kollapsar mot det trygga. |
+| Alla agenter från dag 1 (svärm som startarkitektur) | **Svärm i sista fasen**, av bara delar som bevisat sig | Nästan alla svärm-fel sitter i skarvarna, inte i agenterna. |
+| *"bättre idéer?!"* som förhoppning | **Uppmätt effekt** mot CD:ns omdöme, i varje fas | Det är enda sättet att veta om något faktiskt hjälpte. |
 
 Resultatet är att projektet levererar **två saker** i stället för ett:
 verktyget som ursprungsbriefen bad om, *plus* bevisad kunskap om vad som
