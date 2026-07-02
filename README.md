@@ -204,18 +204,137 @@ för hela resonemanget om varför en CD och inte en jury.
 
 ---
 
-## De fem faserna — översikt
+## Vår arkitektur — från material till RADONifierad idé
 
 Byggs i ordning. Vi går inte vidare till nästa fas förrän den föregående är
 uppmätt mot linjalen.
 
-| Fas | Vad | Varför just nu | Slutar med |
-|---|---|---|---|
-| **0 — Bygg linjalen** | CD betygsätter en blandad batch (vinnare + bortvalda + AI-baseline) blint. | Utan en linjal kan vi inte veta om senare faser gör något bra. | Ett bedömt underlag som allt senare mäts mot. |
-| **1 — Testa frågan** | Jämför en "naiv" prompt ("ge tio idéer") mot en som ber om bredden av tänkbara idéer. | Detta är det enklaste och billigaste greppet mot mode collapse — måste testas först innan vi lägger på något tyngre. | Har breddgreppet effekt? Om ja, hur mycket? |
-| **2 — Testa ingången** | Mata in "överraskande fakta" från andra fält (freak facts), översätt dem till en bärande kreativ mekanism, generera sen. | Om Fas 1 hjälpte lite — hjälper detta *mer*, och gör det något Fas 1 inte gjorde? Måste testas separat. | Tillför freak facts användbar nyhet ovanpå Fas 1? |
-| **3 — Testa urvalet** | Bygg ett urval som väljer på *flera axlar samtidigt* (inte en totalpoäng). En idé sparas om den är bäst på minst en dimension. | Hittills har vi bara genererat. Nu prövar vi om urvalslogiken själv skyddar det vassa bättre än en sammanvägd poäng. | Väljer systemets urval samma "topp" som seniorerna? |
-| **4 — Sätt ihop** | Bara komponenter som klarat sitt prov. Här (inte förr) introduceras ev. orkestreringsramverk eller flera agenter. | Att sätta ihop delar innan vi vet vad de bidrar med gör alla fel osynliga. | Ett sammansatt system där varje del har ett dokumenterat bidrag. |
+```mermaid
+flowchart TB
+    subgraph SETUP[" 📥 Material till Fas 0 "]
+        direction LR
+        W["~10 Vinnare<br/>gamla RADON-idéer"]
+        D["~10 Bortvalda<br/>mänskliga, ej valda"]
+        AI0["~10 AI-baseline<br/>från svag, fryst prompt"]
+    end
+
+    F0["Fas 0 — Bygg linjalen<br/><br/>CD betygsätter allt material blint<br/>5-gradig skala + topp-tail-flagga<br/>Sanity-check på ~1/3<br/>Sittning 2 efter 2-3 v = stabilitetstest<br/><br/>👤 CD · Sanity-checkare · CT"]
+
+    L{{"🎯 LINJALEN<br/>CD:ns kvalitetsfunktion<br/>Varje senare fas mäts mot denna"}}
+
+    F1["Fas 1 — Testa frågan<br/><br/>Naiv prompt vs. bredare prompt<br/>be om bredden av tänkbara idéer<br/><br/>👤 CT bygger · CD bedömer"]
+
+    F2["Fas 2 — Testa ingången<br/><br/>Freak facts översatta till<br/>bärande kreativ mekanism<br/>Paired test: samma brief med/utan<br/><br/>👤 CT bygger · CD bedömer"]
+
+    F3["Fas 3 — Testa urvalet<br/><br/>Flera axlar samtidigt (Pareto)<br/>Ingen totalpoäng<br/>Brand fit som golv, inte mål<br/><br/>👤 CT bygger · CD jämför urval"]
+
+    F4["Fas 4 — Sätt ihop<br/><br/>Bara delar som klarat sitt prov<br/>Ev. orkestrering + fler generatorer<br/>Multi-agent här — inte förr<br/><br/>👤 CT bygger · CD validerar helheten"]
+
+    GOAL(["✨ Målet: en pipeline av RADONifierade idéer<br/>Bär RADON:s DNA · Mer än average · Mer spot on än standard-LLM"])
+
+    SETUP --> F0 --> L ==> F1 ==> F2 ==> F3 ==> F4 ==> GOAL
+```
+
+**Målet — en pipeline av *RADONifierade idéer*.** Inte en enskild
+snygg idé, utan ett flöde som konsistent producerar kreativa uppslag som
+bär RADON:s DNA, är *"mer än average"* och *"mer spot on"* än vad en
+standard-LLM (Claude, GPT, Gemini rakt av) ger oss. Så här tar vi oss
+dit, fas för fas.
+
+### Fas 0 — Bygg linjalen
+
+- **Vad fasen tillför:** En definierad måttstock för vad *"bra"* betyder
+  hos RADON. CD:n bedömer blint ~30–50 idéer i tre tiers (vinnare,
+  bortvalda, AI-baseline) på 5-gradig skala. Två sittningar med några
+  veckor mellan för att verifiera stabilitet över tid.
+- **Varför kritiskt:** Utan en linjal kan vi inte veta om senare faser
+  gör något bra. Vi skulle hitta på ett mått i efterhand som råkar gynna
+  det vi just byggt. Utan Fas 0 är alla efterföljande experiment gissning.
+- **Involverade:** CD (måttstockens auktoritet) · Sanity-checkare (andra
+  läsare, stickprov) · Creative Technologist (samlar material, kör
+  bedömningen)
+- **Producerar:** *Linjalen* — CD:ns kvalitetsfunktion. Ett bedömt
+  underlag som alla senare faser mäter sin output mot.
+
+### Fas 1 — Testa frågan
+
+- **Vad fasen tillför:** Det billigaste och enklaste greppet mot mode
+  collapse — att be modellen om *bredden* av tänkbara idéer i stället
+  för dess topp-tio favoriter.
+- **Varför kritiskt:** Om det enklaste greppet redan löser 80% av
+  problemet är det slöseri att bygga på freak facts, urvalslogik och
+  orkestrering. Vi vet inte förrän vi mätt.
+- **Involverade:** Creative Technologist (skriver prompts, kör
+  generering) · CD (bedömer nya idéer mot linjalen)
+- **Producerar:** Ett mätbart svar på om breddgreppet gav fler distinkta
+  koncept i toppskiktet.
+
+### Fas 2 — Testa ingången
+
+- **Vad fasen tillför:** *Freak facts* (icke-uppenbara mänskliga
+  sanningar från andra fält) översatta till en bärande kreativ mekanism
+  *innan* de matas in i genereringen — inte rått inkastade.
+- **Varför kritiskt:** Freak facts har det starkaste forskningsstödet av
+  alla grepp för att skapa nya vinklar. Men om vi lägger på det samtidigt
+  som breddgreppet i Fas 1 kan vi inte veta vilket som gjorde jobbet. En
+  variabel i taget.
+- **Involverade:** Creative Technologist (bygger översättar-prompt +
+  scout-mekanism) · CD (bedömer med/utan freak facts i paired test)
+- **Producerar:** Ett mätbart svar på om freak facts tillför användbar
+  nyhet *ovanpå* Fas 1.
+
+### Fas 3 — Testa urvalet
+
+- **Vad fasen tillför:** En urvalslogik som väljer på flera axlar
+  *samtidigt* (originalitet, brand-fit, körbarhet) utan att slå ihop
+  till en totalpoäng. En idé sparas om den är bäst på minst en axel.
+- **Varför kritiskt:** Sammanvägd totalpoäng gynnar systematiskt det
+  trygga över det vågade — det är den mekanism som gjorde
+  *"death match"*-domaren i ursprungsbriefen till en potentiell
+  mediokritetsförstärkare. Pareto-urval är *själva greppet* som skyddar
+  det vassa.
+- **Involverade:** Creative Technologist (bygger urvalslogik) · CD
+  (jämför systemets topp-urval med sitt eget på samma material)
+- **Producerar:** Ett svar på om systemets urval matchar CD:ns urval av
+  topp-idéer på blindtest.
+
+### Fas 4 — Sätt ihop
+
+- **Vad fasen tillför:** Ett sammansatt system av delar som klarat sitt
+  prov. Här — och först här — introduceras ev. orkestreringsramverk,
+  flera generatorer med olika kreativa röster (à la briefens *"PR idea
+  agent, Obscure fuck up agent, TikTok agent, Emotional agent"*), eller
+  scout-svärm.
+- **Varför kritiskt:** Multi-agent-svärmar fallerar i skarvarna mellan
+  agenterna, inte i agenterna själva. Att bygga hela svärmen först är
+  att lägga tiden på att laga skarvar innan vi vet om agenterna är värda
+  att sätta ihop. Ihopsättning sist gör att varje del har ett dokumenterat
+  och uppmätt bidrag.
+- **Involverade:** Creative Technologist (bygger integration) · CD
+  (validerar helhetens output mot linjalen)
+- **Producerar:** Ett fungerande system som konsistent producerar idéer
+  som möter linjalens topp-tail — på riktiga briefer, inte bara i test.
+
+### Målet — en pipeline av RADONifierade idéer
+
+Slutresultatet är inte en enskild bra idé, utan **ett kontinuerligt flöde**
+av kreativa uppslag som är:
+
+- **Igenkännbart RADON** — bär byråns kreativa DNA från
+  *Agency DNA/Skill.md* (metaforer, past winning work, visuella regler
+  från de bästa kreatörerna och regissörerna). Ser inte ut som generisk
+  AI-output.
+- **"Mer än average"** — inte det statistiskt sannolika
+  mittemellan-svaret, utan det som får en senior kreatör att stanna upp
+  och läsa två gånger.
+- **"Mer spot on" än standard-LLM** — mätbart bättre än vad Claude, GPT
+  eller Gemini rakt av producerar på samma brief. Bevisat genom Fas
+  0-linjalens bedömning, inte känsla eller AI-domare.
+
+Pipeline-aspekten är hela poängen: verktyget ska mata kreatörer med
+uppslag *proaktivt och på brief*, inte bara producera en enstaka snygg
+demo. Volymen kommer från maskinen; det vassa urvalet och sluttolkningen
+förblir mänskliga.
 
 ---
 
