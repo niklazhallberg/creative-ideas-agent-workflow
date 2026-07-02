@@ -15,6 +15,10 @@ results/runs/*
 results/evals/*
 !results/evals/.gitkeep
 
+# Slack-reaktioner — user_ids är PII, får aldrig committas (ADR 0004)
+results/reactions/*
+!results/reactions/.gitkeep
+
 # Python
 __pycache__/
 *.py[cod]

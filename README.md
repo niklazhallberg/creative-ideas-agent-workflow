@@ -226,9 +226,16 @@ flowchart TB
 
     F4["Fas 4 — Sätt ihop<br/><br/>Bara delar som klarat sitt prov<br/>Ev. orkestrering + fler generatorer<br/>Multi-agent här — inte förr<br/><br/>👤 CT bygger · CD validerar helheten"]
 
-    GOAL(["✨ Målet: en pipeline av RADONifierade idéer<br/>Bär RADON:s DNA · Mer än average · Mer spot on än standard-LLM"])
+    GOAL(["✨ Pipeline av RADONifierade idéer<br/>Bär RADON:s DNA · Mer än average · Mer spot on än standard-LLM"])
 
-    SETUP --> F0 --> L ==> F1 ==> F2 ==> F3 ==> F4 ==> GOAL
+    SLACK["💬 Slack: #radon-ideation<br/><br/>Batch postas (10 idéer)<br/>Multi-CD reagerar:<br/>🔥 topp · 👍 solid · 👎 nej · 🚀 använde<br/>Valfria kommentarer i tråd<br/><br/>👥 CD-team i kanalen"]
+
+    LEARN["📊 CT + CD analyserar signalen<br/><br/>results/reactions/*.jsonl<br/>Uppdaterar manuellt:<br/>prompts · Skill.md · urvalsvikter<br/><br/>Vi tränar aldrig om modellen"]
+
+    SETUP --> F0 --> L
+    L ==> F1 ==> F2 ==> F3 ==> F4 ==> GOAL
+    GOAL ==> SLACK ==> LEARN
+    LEARN -. förbättrar över tid<br/>till nästa batch .-> F4
 ```
 
 **Målet — en pipeline av *RADONifierade idéer*.** Inte en enskild
@@ -331,6 +338,130 @@ Pipeline-aspekten är hela poängen: verktyget ska mata kreatörer med
 uppslag *proaktivt och på brief*, inte bara producera en enstaka snygg
 demo. Volymen kommer från maskinen; det vassa urvalet och sluttolkningen
 förblir mänskliga.
+
+---
+
+## Feedback-loopen — så här lär sig systemet
+
+Briefen frågar: *"Hur sätter vi upp ett lärande system?"* Utan svar på
+den frågan har vi bara en enkelriktad idégenerator. Här är svaret, i
+klarspråk.
+
+**Kort version:** Idéer levereras i Slack. Flera CD:er reagerar med
+emoji (och valfria kommentarer). Signalerna samlas in. CT + CD läser
+och uppdaterar prompts, Skill.md och urval **manuellt**. Systemet ändrar
+aldrig sig själv. Vi tränar aldrig om modellen. Vi lär oss *varför*
+något funkar — det är hela värdet.
+
+Full spec: [`ADR 0004 — feedback-loopen`](./docs/decisions/0004-feedback-loopen.md).
+
+### Var landar idéerna?
+
+Slack-kanalen **`#radon-ideation`**. Flera seniora CD:er sitter där.
+Varje batch är 10 idéer på en brief — en Slack-message per idé, med
+`idea_id` diskret i första raden för spårbarhet.
+
+### Hur ger CD:er feedback? — fyra emoji, valfria kommentarer
+
+Reagera med emoji direkt på idé-messaget. En sekunds arbete.
+
+| Emoji | Betyder |
+|---|---|
+| 🔥 | Topp — sticker ut |
+| 👍 | Solid, kan användas |
+| 👎 | Nej |
+| 🚀 | Adoption — jag använde den här (i deck, klientmöte, produktion) |
+
+Vill du säga *varför* → svara i tråden. Fri text. Rekommenderat vid
+🔥 eller 👎 om det går snabbt, men aldrig krav. Tystnad ≠ avvisande —
+reagera bara när du har en åsikt.
+
+**Multi-CD-signalen är rikare än en persons.** Enighet (tre 🔥 på samma
+idé) = starkt kvalitetssignal. Oenighet (blandat 🔥 och 👎) = signal om
+gränsfall eller personlig smak. Slack stackar reaktioner automatiskt —
+ingen aggregerings-kod behövs.
+
+**Vokabulären står pinnad högst upp i kanalen** så nya deltagare ser den.
+
+### Hur ber CD:er om nya idéer?
+
+**Stadium 1 (MVP, Fas 4-pilot):** CD skickar briefen till CT i
+`#radon-idea-triggers` eller DM: *"Kan du köra en batch på detta?
+[Notion-länk]"* CT kör `scripts/post_batch.py` — nya idéer dyker upp i
+`#radon-ideation` inom minuter. Fungerar från dag 1, ingen extra
+infrastruktur.
+
+**Stadium 2 (om piloten bevisas):** `/radon-ideate`-slash-command i
+Slack. CD:er triggar själva via ett interaktivt formulär. Byggs *när*
+CD:er ber om självbetjäning, inte förr.
+
+### Vad händer med signalen — hur "lär sig" systemet?
+
+**Manuellt, via människor.** Så här:
+
+1. CT kör `scripts/pull_reactions.py --since=<datum>` regelbundet
+   (t.ex. veckovis). Alla reaktioner + kommentarer landar i
+   `results/reactions/*.jsonl`.
+2. Varje reaktion är tie:ad till *vilken idé* som fick den. Varje idé
+   är i sin tur tie:ad till *hur den producerades* (prompt-version,
+   generator-variant, brief, freak-facts, fas). Attribution är fullt
+   spårbar bakåt.
+3. CT och CD läser igenom signalerna: vad fick 🔥? Vad fick 👎? Vad
+   säger kommentarerna? Vilka idéer gick vidare till 🚀?
+4. **Människorna beslutar:** ska prompten uppdateras? Ska Skill.md
+   utökas med en ny metafor som CD:er reagerade på? Ska urvalsvikterna
+   justeras?
+5. Uppdateringar committas som *nya versioner* (t.ex.
+   `verbalized_generator_v2.md`) så attribuerbarheten bevaras — vi kan
+   alltid se vilken idé som producerades av vilken version.
+
+**Ingenting ändras automatiskt.** Ingen AI-domare räknar signal och
+justerar. Systemet är dumt; människorna är smarta. Det är poängen.
+
+### Om ingen reagerar — vad då?
+
+- **5 arbetsdagar utan reaktion** → batchen märks `no_signal` (skilt
+  från `rejected`).
+- **En påminnelse på dag 3** i kanalen — inte DM, inte personligt
+  naggnings. Sen inget mer.
+- **Om `no_signal` blir vanligt** → egen signal. Antingen batch-
+  frekvensen är fel, tidpunkten stör, eller CD:er tappat intresse.
+  Alla tre är viktiga att veta i tid.
+
+### Så här ser en typisk Slack-vy ut
+
+```
+🧠 [Header]
+Ny batch — brief: "Öka emotionell anknytning till varumärke X"
+10 idéer följer. Reagera med 🔥 / 👍 / 👎. 🚀 om du tar en vidare.
+──────────
+
+💡 [idea_a1b2c3d4]
+Varje förpackning innehåller ett unikt, handskrivet meddelande från
+en av de anställda på fabriken. I appen kan kunden följa avsändaren
+via en kort film.
+🔥 x2 · 👍 x1 · 💬 1 svar
+
+💡 [idea_e5f6g7h8]
+[nästa idé...]
+```
+
+### Tekniskt — det enklaste som funkar
+
+- **Ingen server, ingen webhook, inget krångel.**
+- Slack-bot registrerad i RADON:s workspace med tre scopes:
+  `channels:history`, `reactions:read`, `chat:write`. Bot-token i
+  `.env` som `SLACK_BOT_TOKEN`.
+- Python-modul `src/radon/slack.py` med två funktioner: `post_batch()`
+  och `pull_reactions()`. Använder officiella `slack_sdk`.
+- Två CLI-skript: `scripts/post_batch.py` (postar) och
+  `scripts/pull_reactions.py` (pullar).
+- Reaktions-data i `results/reactions/*.jsonl` (gitignored — Slack
+  user_ids är PII).
+
+**Varför så enkelt?** Multi-agent-svärmar och webhooks fallerar i
+skarvarna. Ett CLI som pullar Slack när vi vill har inga skarvar. Det
+är samma disciplin som resten av projektet.
 
 ---
 
@@ -546,6 +677,11 @@ byggs inte som egen handling.
 - Inte ett system med en totalpoäng för idékvalitet. Fas 3 använder flera
   axlar samtidigt — brand fit är ett *golv*, inte ett optimeringsmål.
 - Inte ett LLM-as-judge-system. Sluturvalet är alltid mänskligt.
+- **Inte ett självlärande system som ändrar sig själv.** Feedback-loopen
+  är *manuell* — CT + CD läser Slack-signalerna och beslutar när prompts,
+  Skill.md eller urval ska uppdateras. Systemet uppdaterar aldrig sig
+  själv. Vi tränar aldrig om modellen. Se
+  [ADR 0004](./docs/decisions/0004-feedback-loopen.md).
 
 ---
 
@@ -566,6 +702,9 @@ De aktiva besluten:
 - [ADR 0003](./docs/decisions/0003-nedskalad-fas-0.md) — konkreta parametrar
   för Fas 0 (30–50 idéer, tre tiers, 5-gradig skala), och varför
   "bara vinnare"-genvägen inte fungerar.
+- [ADR 0004](./docs/decisions/0004-feedback-loopen.md) — feedback-loopen:
+  Slack + multi-CD + emoji-vokabulär + attribution-krav från Fas 1, och
+  varför vi valde manuellt lärande framför automatisk loop.
 
 Ursprungsbriefens fulla arkitektur finns bevarad i
 [`docs/archive/`](./docs/archive/) som historik — den följs *inte* som
