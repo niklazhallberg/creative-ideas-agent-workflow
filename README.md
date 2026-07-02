@@ -14,10 +14,6 @@ och vilka grepp som faktiskt flyttar nålen hos just oss.
 
 ---
 
-## Från ursprungsbriefen till den här planen
-
-Projektet startade med en brief till vår Creative Technologist. Vi
-återger den ordagrant först, sen vår läsning. Där vi tolkar säger vi det.
 
 ### Vad briefen säger — ordagrant
 
