@@ -111,10 +111,17 @@ nära noll med experter på kreativ kvalitet — den får aldrig sista ordet.
 
 ## Faser (bygg i ordning — gå inte vidare förrän föregående fas mätts)
 
-- **Fas 0 — Måttstocken.** Seniorer bedömer blandat material (gamla vinnare +
-  bortvalda + AI-baseline) blint. Mät: är de överens (inter-rater)? Korrelerar
-  någon billig automatisk proxy med deras omdöme? Måttstocken måste fånga
-  TOPPEN (topp-10%), inte snittet.
+- **Fas 0 — Måttstocken.** En creative director bedömer blandat material
+  (gamla vinnare + bortvalda-men-mänskliga + AI-baseline) blint — hens
+  omdöme ÄR måttstocken. En andra läsare gör lätta stickprovskontroller mot
+  blinda fläckar, inte som parallell domare. Stabilitet mäts som CD:ns
+  konsekvens med sig själv över tid (replikat-idéer slumpvis utlagda), inte
+  som inter-rater agreement. Mät också: korrelerar någon billig automatisk
+  proxy med CD:ns omdöme? Måttstocken måste fånga TOPPEN (topp-10%), inte
+  snittet. Konkreta parametrar (30–50 idéer, tre tiers, 5-gradig skala +
+  topp-tail-flagga, två sittningar) i ADR 0003. Auktoritetsmodellen (en CD)
+  i ADR 0002. "Bara vinnare"-genvägen är avvisad i ADR 0003 — återuppta
+  den inte utan att läsa varför.
 - **Fas 1 — Enklaste greppet.** Naiv generering vs. verbalized sampling. EN
   generator, EN variabel. Mät distinkta konceptfamiljer mot Fas 0-måttstocken.
   Höj INTE temperaturen som confound.
